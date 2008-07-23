@@ -57,7 +57,7 @@ module Rack
       end
       
       def call(env)
-        path        = env['PATH_INFO'].chomp('/')
+        path        = (env['PATH_INFO'] || env['REQUEST_PATH']).chomp('/')
         method      = env['REQUEST_METHOD']
         cached_path = (path.empty? ? 'index' : path) + ActionController::Base.page_cache_extension
         
